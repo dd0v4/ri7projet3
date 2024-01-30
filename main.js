@@ -11,15 +11,21 @@ class Question {
     }
 }
 
+// On crée une classe question avec un constructeur pour rendre simple la création de questions
+
 const creerQuestion = (bonne, titre, listeReponses) => {
     let nouvelleQuestion = new Question(bonne, titre, listeReponses);
     arrQuestions.push(nouvelleQuestion);
 }
+// On utilise notre classe pour créer des objets du type de la classe Question et on les range dans un array
 
 const finProgramme = () => {
     console.log(`Vous avez fini le quizz avec une note de ${score}/${arrQuestions.length}`);
     process.exit();
 }
+
+// On crée une fonction pour mettre fin au programme avec l'affichage du score de l'utilisateur 
+
 const controlInput = (number, prompt) => {
     for (let i = 0; i < number; i++) {
         if (Number(prompt) <= number) {
@@ -29,6 +35,7 @@ const controlInput = (number, prompt) => {
     console.log("Entrée incorrecte.");
     return false;
 }
+// On contrôle l'input de l'utilisateur pour vérifier si son entrée est correcte 
 
 const isSure = (choix) => {
     console.log(`Vous avez sélectionné le choix ${choix}, est-ce correct ?\n`);
@@ -43,6 +50,7 @@ const isSure = (choix) => {
         return true;
     }
 }
+// On demande à notre utilisateur si il est sûr de sa réponse
 
 const afficherQuestion = (index) => {
     console.log(arrQuestions[index - 1].titre);
@@ -56,15 +64,18 @@ const afficherQuestion = (index) => {
     });
     console.log(string);
 }
+// On crée une fonction pour afficher les questions avec en paramètre l'index dans l'array des questions 
 
 const scoreQuestion = (prompt, index) => {
     if (Number(prompt) === arrQuestions[index -1].bonneReponse){
         score++;
     }
 }
+// On crée une fonction pour vérifier si l'utilisateur a choisi la bonne réponse
 const continuer = () => {
     prompt(`Appuyez sur entrée pour continuer....`);
 }
+//Fonction pour que l'user appuie sur entrée quand il est prêt à voir la prochaine question
 
 const controlerQuestion = (question, nombreReponses) => {
     do {
@@ -79,12 +90,20 @@ const controlerQuestion = (question, nombreReponses) => {
     return question;
 }
 
+//Fonction pour utiliser nos deux fonctions ensemble pour contrôler l'input utilisateur et lui demander si il est sûr 
+
 const affichageFinal = (variable, bonneReponse, index) =>{
     afficherQuestion(index);
     scoreQuestion(controlerQuestion(variable, 4), index);
     continuer();
 }
+// Fonction pour contrôler l'input et vérifier si la réponse est bonne
 
+/*  
+----------------------------------------------------------------------------------------------------------------------------
+DÉBUT DU PROGRAMME AVEC L'UTILISATION DE NOS FONCTIONS DÉCLARÉES
+----------------------------------------------------------------------------------------------------------------------------
+*/
 let question1;
 creerQuestion(1, "Combien font 2 + 2 ?", ["4", "44", "3", "2"]);
 affichageFinal(question1, 1, 1);
